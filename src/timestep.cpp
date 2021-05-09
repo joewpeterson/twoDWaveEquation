@@ -1,5 +1,6 @@
 #include "twoDWave.h"
 
+// Do one time step of the wave equation
 void fdWaveTimeStep(model_parameters *mod, input_wavelet *inwave)
 {
 
@@ -19,9 +20,6 @@ void fdWaveTimeStep(model_parameters *mod, input_wavelet *inwave)
 					+ derivY[index]) + 2* mod->p1[index] - mod->p0[index];
 		}
 	}
-	
-	//We can code in edge absorption later
-	//mod->p2[mod->nx - 1] = -(mod->p1[mod->nx - 1] - mod->p1[mod->nx - 2])*mod->vel[mod->nx -1]*inwave->dt/mod->dx + mod->p1[mod->nx - 1]; 
 	
 	//swap the pressure waves to increment to the next time
 	mod->p0.swap(mod->p1);

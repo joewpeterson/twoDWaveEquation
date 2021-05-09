@@ -11,6 +11,7 @@ class model_parameters;
 class input_wavelet;
 
 void init_vel (std::unique_ptr<float[]> & vel, int nx, int ny, float vl1, float vl2);
+void init_wavelet (std::unique_ptr<float[]> & wavelt, int nt, float dt);
 void fdWaveTimeStep(model_parameters *mod, input_wavelet *inwave);
 
 /*
@@ -20,16 +21,21 @@ void fdWaveTimeStep(model_parameters *mod, input_wavelet *inwave);
  */
 class model_parameters {
 public:
-	//x direction
+	// x direction
 	int nx = 1024;
 	int lx = 600;
 	float dx = (float)lx/(float)nx;
 	
-	//y direction
+	// y direction
 	int ny = 1024;
 	int ly = 600;
 	float dy = (float)ly/(float)ny;
 
+	// Vel of input model layers
+	float minVel = 1500;
+	float maxVel = 2000;
+
+	// init the needed pointers
 	int model_size = nx * ny;
 	std::unique_ptr<float[]> p0 = std::make_unique<float[]>(model_size);
 	std::unique_ptr<float[]> p1 = std::make_unique<float[]>(model_size);
@@ -40,8 +46,9 @@ public:
 	model_parameters() 
 	{
 		std::cout << "mp constructor" << std::endl;
+
 		//initialize the velocity model
-		init_vel (vel, nx, ny, 1500, 2000);
+		init_vel (vel, nx, ny, minVel, maxVel);
 	}
 
 	~model_parameters()
@@ -58,34 +65,19 @@ public:
 	float Lt = 0.5;
 	
 	int inject_index;
+
 	std::unique_ptr<float[]> wavelet;
 	input_wavelet(model_parameters& mod)
 	{
 		std::cout << "iw constructor" << std::endl;
-		float maxVel = 0;
-		for (int i = 0; i< mod.nx*mod.ny; i++)
-			if (mod.vel[i] > maxVel)
-				maxVel = mod.vel[i];
 
-		// Safety margine
-		maxVel *= 1.5;
-
+		float maxVel;
+		maxVel = 1.5 * mod.maxVel;
 		dt = (float)mod.lx/(float)mod.nx / maxVel;
 		nt = Lt / dt;
-		wavelet = std::make_unique<float[]>(nt);
-		std::cout << nt << std::endl;
-		
-		double tau;
-		float fc, t0;
-		fc = 20;
-		t0 = 1.5/fc;
-		for (int i=0; i<nt; i++){
-			tau = fc* M_PI * (i*dt - t0); 
-			wavelet[i] = (1 - 2*(pow(tau, 2))) *exp(-pow(tau,2));
-		}
-
 		inject_index = mod.nx/4 * mod.ny + mod.ny/10;
- 
+
+		init_wavelet (wavelet, nt, dt); 
 	}
 
 	~input_wavelet()

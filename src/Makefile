@@ -1,7 +1,9 @@
-OBJ= timestep.o init_vel.o twoDWave.o
+OBJ= timestep.o init_vel.o twoDWave.o init_wavelet.o
+CPP=g++
+export CXXFLAGS = -fopenmp
 
 twoDWave: $(OBJ)
-	g++-10 -std=c++17 $(OBJ) -o twoDWave -fopenmp 
+	$(CPP) $(OBJ) -o twoDWave $(CXXFLAGS)
 
 $(OBJ): twoDWave.h 
 

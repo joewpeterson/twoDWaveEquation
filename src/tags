@@ -1,0 +1,32 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.9~svn20110310	//
+Lt	twoDWave.h	/^	float Lt = 0.5;$/;"	m	class:input_wavelet
+TWO_D_WAVE	twoDWave.h	9;"	d
+dt	twoDWave.h	/^	float dt;$/;"	m	class:input_wavelet
+dx	twoDWave.h	/^	float dx = (float)lx\/(float)nx;$/;"	m	class:model_parameters
+dy	twoDWave.h	/^	float dy = (float)ly\/(float)ny;$/;"	m	class:model_parameters
+fdWaveTimeStep	timestep.cpp	/^void fdWaveTimeStep(model_parameters *mod, input_wavelet *inwave)$/;"	f
+init_vel	init_vel.cpp	/^void init_vel (std::unique_ptr<float[]> & vel, int nx, int ny, float vl1, float vl2)$/;"	f
+inject_index	twoDWave.h	/^	int inject_index;$/;"	m	class:input_wavelet
+input_wavelet	twoDWave.h	/^	input_wavelet(model_parameters& mod)$/;"	f	class:input_wavelet
+input_wavelet	twoDWave.h	/^class input_wavelet$/;"	c
+lx	twoDWave.h	/^	int lx = 600;$/;"	m	class:model_parameters
+ly	twoDWave.h	/^	int ly = 600;$/;"	m	class:model_parameters
+main	twoDWave.cpp	/^int main()$/;"	f
+model_parameters	twoDWave.h	/^	model_parameters() $/;"	f	class:model_parameters
+model_parameters	twoDWave.h	/^class model_parameters {$/;"	c
+model_size	twoDWave.h	/^	int model_size = nx * ny;$/;"	m	class:model_parameters
+nt	twoDWave.h	/^	int nt;$/;"	m	class:input_wavelet
+nx	twoDWave.h	/^	int nx = 1024;$/;"	m	class:model_parameters
+ny	twoDWave.h	/^	int ny = 1024;$/;"	m	class:model_parameters
+p0	twoDWave.h	/^	std::unique_ptr<float[]> p0 = std::make_unique<float[]>(model_size);$/;"	m	class:model_parameters
+p1	twoDWave.h	/^	std::unique_ptr<float[]> p1 = std::make_unique<float[]>(model_size);$/;"	m	class:model_parameters
+p2	twoDWave.h	/^	std::unique_ptr<float[]> p2 = std::make_unique<float[]>(model_size);$/;"	m	class:model_parameters
+vel	twoDWave.h	/^	std::unique_ptr<float[]> vel = std::make_unique<float[]>(model_size);$/;"	m	class:model_parameters
+wavelet	twoDWave.h	/^	std::unique_ptr<float[]> wavelet;$/;"	m	class:input_wavelet
+~input_wavelet	twoDWave.h	/^	~input_wavelet()$/;"	f	class:input_wavelet
+~model_parameters	twoDWave.h	/^	~model_parameters()$/;"	f	class:model_parameters
